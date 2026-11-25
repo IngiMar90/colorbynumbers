@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="is">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#faf8f2">
+  <meta name="description" content="Veldu lit, finndu númerið og sjáðu leynimyndina birtast. Skemmtilegur litaleikur með fjórum stigum.">
+  <title>Leynilitir · Litað eftir númerum</title>
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script src="puzzles.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <a class="brand" href="#" aria-label="Leynilitir, forsíða"><span class="brand-icon" aria-hidden="true"><i></i><i></i><i></i><i></i></span>Leyni<span>litir</span><span class="brand-dot">✦</span></a>
+  <div class="header-actions"><span class="header-note">Ein tala. Einn litur. Óvænt mynd.</span><button id="sound" class="icon-button" aria-label="Kveikja á hljóði" aria-pressed="false">♫<span>Hljóð af</span></button></div>
+</header>
+<main>
+<section id="home">
+  <div class="hero">
+    <div><span class="eyebrow"><span class="tiny-star">✦</span> LÍTIÐ LITAÆVINTÝRI</span><h1>Hvaða mynd<br>leynist <span>hér?</span></h1><p>Veldu lit. Finndu sama númer.<br>Litaðu reitina og uppgötvaðu leynimyndina!</p><div class="hero-note"><span aria-hidden="true">☀</span> Engin tímamörk. Bara gaman.</div></div>
+    <div class="hero-art" aria-hidden="true"><div class="art-label">HVER REITUR ER VÍSBENDING</div><div class="pixel-poster"><div class="poster-pixels"></div><span>?</span></div><span class="art-spark spark-one">✦</span><span class="art-spark spark-two">✳</span><div class="art-sticker">Veldu.<br>Litaðu.<br>Uppgötvaðu.</div></div>
+  </div>
+  <div class="section-heading"><div><span class="eyebrow">FYRST VELUR ÞÚ</span><h2>Hvað viltu marga reiti?</h2></div><span class="subtle">Þú mátt velja hvaða stig sem er.</span></div>
+  <div id="levels" class="level-grid" aria-label="Veldu erfiðleikastig"></div>
+  <div class="section-heading puzzle-heading"><div><span class="eyebrow" id="level-label">STIG 1</span><h2>Veldu leynimynd</h2></div><span id="collection-count" class="collection-count"></span></div>
+  <div id="puzzles" class="puzzle-grid"></div>
+  <p class="save-note">✓ Framvindan þín vistast í þessum vafra. Þú getur haldið áfram seinna.</p>
+</section>
+<section id="game" hidden>
+  <div class="game-heading"><button id="back" class="text-button">← Allar myndir</button><div class="game-meta"><span id="game-level" class="pill"></span><span id="game-size" class="subtle"></span></div></div>
+  <div class="play-layout">
+    <aside class="play-sidebar"><span class="eyebrow">LEYNDARDÓMUR Í HVERJUM REIT</span><h1 id="puzzle-title">Leynimynd 01</h1><p id="game-instruction">Veldu lit og litaðu reiti með sama númeri.</p>
+      <div class="progress-card"><div><span>Myndin þín</span><strong id="progress-label">0%</strong></div><progress id="progress" max="100" value="0" aria-label="Framvinda myndar"></progress><span id="cell-count" class="subtle"></span></div>
+      <div class="palette-heading"><h2>Veldu lit</h2><span id="selected-label"></span></div><div id="palette" class="palette" aria-label="Litir"></div>
+      <div class="helper"><span aria-hidden="true">☝</span><p>Þú mátt líka halda músinni niðri og draga yfir reitina.</p></div>
+      <button id="hint" class="secondary-button" aria-pressed="false">✧ Sýna reiti með völdum lit</button>
+    </aside>
+    <div class="board-column"><div class="board-toolbar"><span id="board-status">Hvaða mynd kemur í ljós?</span><div><button id="zoom-out" class="icon-button" aria-label="Minnka reiti">−</button><button id="zoom-in" class="icon-button" aria-label="Stækka reiti">+</button></div></div><div id="board-scroll" class="board-scroll"><div id="board" class="board" role="grid" aria-label="Litað eftir númerum"></div></div><div class="board-footer"><span>✦ Einn reitur í einu</span><button id="restart" class="text-button">↻ Byrja mynd aftur</button></div></div>
+  </div>
+  <section id="celebration" class="celebration" hidden aria-labelledby="done-title"><span class="done-star" aria-hidden="true">✦</span><div><span class="eyebrow">LEYNDARDÓMURINN ER LEYSTUR!</span><h2 id="done-title"></h2><p>Vel gert! Þú litaðir alla myndina.</p></div><div class="done-actions"><button id="download" class="secondary-button">↓ Vista mynd</button><button id="next" class="primary-button">Næsta leynimynd →</button></div></section>
+</section>
+</main>
+<footer><span>Leynilitir <span aria-hidden="true">✦</span></span><span>Lítil skref. Litastór gleði.</span></footer>
+<div id="announcer" class="sr-only" role="status" aria-live="polite"></div>
+<dialog id="restart-dialog"><h2>Byrja þessa mynd aftur?</h2><p>Litirnir sem þú hefur sett á þessa mynd hverfa.</p><div class="dialog-actions"><button id="cancel-restart" class="secondary-button">Halda áfram að lita</button><button id="confirm-restart" class="primary-button">Byrja aftur</button></div></dialog>
+<noscript>Þú þarft að hafa JavaScript virkt í vafranum til að spila Leyniliti.</noscript>
+</body>
+</html>
