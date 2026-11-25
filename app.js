@@ -34,10 +34,10 @@
   }
   function openPuzzle(l,n){
     level=l;puzzle=getPuzzle(l,n);filled=readProgress(puzzle);selected=null;hints=false;zoom=1;focusIndex=0;painting=false;
-    $('home').hidden=true;$('game').hidden=false;$('celebration').hidden=true;
+    document.body.classList.add('is-playing');$('home').hidden=true;$('game').hidden=false;$('celebration').hidden=true;
     $('puzzle-title').textContent=`Leynimynd ${String(n+1).padStart(2,'0')}`;
     $('game-level').textContent=`Stig ${l+1}`;$('game-size').textContent=`${puzzle.size} × ${puzzle.size} · ${puzzle.palette.length} litir`;
-    $('hint').setAttribute('aria-pressed','false');$('board').style.setProperty('--size',puzzle.size);$('board').style.width='100%';
+    $('game').style.setProperty('--color-count',puzzle.palette.length);$('hint').setAttribute('aria-pressed','false');$('board').style.setProperty('--size',puzzle.size);$('board').style.width='100%';
     $('board').setAttribute('aria-rowcount',puzzle.size);$('board').setAttribute('aria-colcount',puzzle.size);$('board').replaceChildren();cells=[];
     for(let y=0;y<puzzle.size;y++){
       const row=document.createElement('div');row.className='board-row';row.setAttribute('role','row');row.setAttribute('aria-rowindex',y+1);
@@ -107,13 +107,31 @@
     $('board').classList.toggle('complete',done);$('celebration').hidden=!done;$('hint').disabled=done||selected===null;
     $('board-status').textContent=done?'Leynimyndin er komin í ljós!':'Hvaða mynd kemur í ljós?';
     $('game-instruction').textContent=done?'Þú kláraðir alla reitina. Sjáðu hvað kom í ljós!':'Veldu málningardós neðst og litaðu reiti með sama númeri.';
-    if(done){$('puzzle-title').textContent=puzzle.name;$('done-title').textContent=puzzle.name+'!';$('next').textContent=puzzle.number<5?'Næsta leynimynd →':'Velja aðra mynd →';if(celebrate){tone(true);announce(`Vel gert! Myndin er ${puzzle.name}. Allir reitir litaðir.`);$('celebration').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'nearest'});}}
+    if(done){$('puzzle-title').textContent=puzzle.name;$('done-title').textContent=puzzle.name+'!';$('next').textContent=puzzle.number<5?'Næsta leynimynd →':'Velja aðra mynd →';if(celebrate){tone(true);announce(`Vel gert! Myndin er ${puzzle.name}. Allir reitir litaðir.`);scheduleFit();}}
     else if(celebrate&&count%10===0)announce(`${percent}% litað.`);
   }
   function setFocus(i,move=true){if(cells[focusIndex])cells[focusIndex].tabIndex=-1;focusIndex=i;cells[i].tabIndex=0;if(move)cells[i].focus({preventScroll:true});}
   function drawImage(canvas,p,scale=1){canvas.width=p.size*scale;canvas.height=p.size*scale;const ctx=canvas.getContext('2d');p.values.forEach((c,i)=>{ctx.fillStyle=p.palette[c];ctx.fillRect(i%p.size*scale,Math.floor(i/p.size)*scale,scale,scale);});}
-  function goHome(){persist();puzzle=null;$('game').hidden=true;$('home').hidden=false;renderHome();window.scrollTo({top:0,behavior:'instant'});$('levels').children[level].focus();}
-  function updateZoom(delta){zoom=Math.max(1,Math.min(3,zoom+delta));$('board').style.width=`${zoom*100}%`;$('zoom-out').disabled=zoom<=1;$('zoom-in').disabled=zoom>=3;}
+  function goHome(){persist();puzzle=null;document.body.classList.remove('is-playing');$('game').hidden=true;$('home').hidden=false;renderHome();window.scrollTo({top:0,behavior:'instant'});$('levels').children[level].focus();}
+  let fitFrame=0;
+  function fitBoard(){
+    if(!puzzle||$('game').hidden)return;
+    const container=$('board-scroll'),style=getComputedStyle(container);
+    const width=container.clientWidth-parseFloat(style.paddingLeft)-parseFloat(style.paddingRight);
+    const height=container.clientHeight-parseFloat(style.paddingTop)-parseFloat(style.paddingBottom);
+    const edge=Math.max(1,Math.floor(Math.min(width,height)));
+    $('board').style.width=`${Math.floor(edge*zoom)}px`;
+    $('board').style.height=`${Math.floor(edge*zoom)}px`;
+    $('board').style.setProperty('--cell-font',`${Math.max(6,Math.min(24,edge*zoom/puzzle.size*.43))}px`);
+    container.classList.toggle('is-zoomed',zoom>1);
+    if(zoom===1){container.scrollTop=0;container.scrollLeft=0;}
+  }
+  function scheduleFit(){cancelAnimationFrame(fitFrame);fitFrame=requestAnimationFrame(fitBoard);}
+  function updateZoom(delta){zoom=Math.max(1,Math.min(3,zoom+delta));$('zoom-out').disabled=zoom<=1;$('zoom-in').disabled=zoom>=3;fitBoard();scheduleFit();}
+  const boardObserver=new ResizeObserver(scheduleFit);boardObserver.observe($('board-scroll'));
+  window.addEventListener('resize',()=>{if(puzzle){zoom=1;updateZoom(0);}});
+  window.visualViewport?.addEventListener('resize',scheduleFit);
+  $('fit-board').addEventListener('click',()=>{zoom=1;updateZoom(0);});
   $('board').addEventListener('pointerdown',event=>{if(event.button!==0)return;const cell=event.target.closest('.cell');if(!cell)return;event.preventDefault();painting=true;dragPointer=event.pointerId;lastPaint=Number(cell.dataset.index);setFocus(lastPaint);$('board').setPointerCapture(event.pointerId);paint(lastPaint);});
   $('board').addEventListener('pointermove',event=>{if(!painting||dragPointer!==event.pointerId)return;const cell=document.elementFromPoint(event.clientX,event.clientY)?.closest('.cell');if(cell&&$('board').contains(cell)){const i=Number(cell.dataset.index);if(i!==lastPaint){lastPaint=i;paint(i);}}});
   function stopPainting(){painting=false;dragPointer=null;lastPaint=-1;}

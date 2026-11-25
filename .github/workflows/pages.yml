@@ -18,13 +18,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Validate puzzle data
+        run: node --test tests/puzzles.test.cjs
       - uses: actions/configure-pages@v5
         with:
           enablement: true
       - name: Stage site files
         run: |
           mkdir _site
-          cp index.html styles.css puzzles.js app.js icon.svg _site/
+          cp index.html styles.css puzzles.js app.js app-shell.js manifest.webmanifest sw.js icon.svg _site/
+          cp -r icons _site/
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
