@@ -8,10 +8,12 @@ Veldu stig og leynimynd. Veldu númeraða málningardós neðst og smelltu á re
 
 | Stig | Stærð | Litir | Myndir |
 | --- | --- | --- | --- |
-| 1 | 8 × 8 | 4 | 6 |
-| 2 | 12 × 12 | 6 | 6 |
-| 3 | 16 × 16 | 8 | 6 |
-| 4 | 20 × 20 | 10 | 6 |
+| 1 | 12 × 12 | 6 | 6 |
+| 2 | 16 × 16 | 8 | 6 |
+| 3 | 20 × 20 | 10 | 6 |
+| 4 | 30 × 30 | 12 | 6 |
+
+Nýja fjórða stigið hefur sex ítarlegar senur með 900 reitum í hverri. Eldri 8 × 8 myndir hafa verið teknar út. Framvinda í 12 × 12, 16 × 16 og 20 × 20 myndunum heldur sömu myndauðkennum þótt stiganúmerin breytist.
 
 Alls 24 upprunalegar myndir; mismunandi myndefni á hverju stigi. Ólitaðir reitir sýna númer og myndin verður smám saman þekkjanleg þegar litað er.
 
@@ -50,4 +52,4 @@ Keyrðu `python3 -m http.server 8080` og opnaðu `http://localhost:8080`. Uppset
 
 Innbyggt Actions verkflæði birtir appskrár, manifest, service worker og appmerki á GitHub Pages við breytingar á `main`. Birtingin krefst engrar byggingar eða pakkauppsetningar. Pages er þegar virkjað fyrir geymsluna.
 
-Myndefni og leikjaframvinda eru útgáfumerkt; breytt röðun eða innihald mynda krefst nýs vistunarlykils til að gömul framvinda eigi áfram við réttar myndir.
+Hvert myndauðkenni er óháð sýnilegu stiganúmeri. Auðkenni myndar og litanúmerun haldast við endurröðun stiga. Ef innihaldi myndar er breytt þarf hún nýtt auðkenni svo gömul framvinda lendi ekki á annarri mynd.

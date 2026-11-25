@@ -15,7 +15,8 @@ const {chromium}=require('playwright');const assert=require('node:assert/strict'
   await checkBounds('.level-card,.puzzle-card,#install-app,#fullscreen',`home controls fit ${width}x${height}`);
   for(const level of [0,3]){
    await page.locator('.level-card').nth(level).click();await page.locator('.puzzle-card').first().click();await settle();
-   await checkBounds('#board,.color-button,.color-key-row,#fullscreen,#back,#hint,#restart',`game controls fit ${width}x${height} level ${level+1}`);
+   assert.equal(await page.locator('.cell').count(),[144,256,400,900][level]);assert.equal(await page.locator('.color-button').count(),[6,8,10,12][level]);
+   await checkBounds('#board,.cell,.color-button,.color-key-row,#fullscreen,#back,#hint,#restart',`game controls fit ${width}x${height} level ${level+1}`);
    const overflow=await page.locator('#board-scroll').evaluate(e=>({x:e.scrollWidth-e.clientWidth,y:e.scrollHeight-e.clientHeight}));assert(overflow.x<=1&&overflow.y<=1,`unzoomed board must fit: ${JSON.stringify({width,height,overflow})}`);
    assert.equal(await page.locator('#brush-preview').getAttribute('data-color'),'#ffffff');
    const n=Number(await page.locator('.cell').first().textContent());await page.locator('.color-button').nth(n-1).click();await page.locator('.cell').first().click();assert(await page.locator('.cell.filled').count()>0);

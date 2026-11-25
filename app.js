@@ -37,7 +37,7 @@
     document.body.classList.add('is-playing');$('home').hidden=true;$('game').hidden=false;$('celebration').hidden=true;
     $('puzzle-title').textContent=`Leynimynd ${String(n+1).padStart(2,'0')}`;
     $('game-level').textContent=`Stig ${l+1}`;$('game-size').textContent=`${puzzle.size} × ${puzzle.size} · ${puzzle.palette.length} litir`;
-    $('game').style.setProperty('--color-count',puzzle.palette.length);$('hint').setAttribute('aria-pressed','false');$('board').style.setProperty('--size',puzzle.size);$('board').style.width='100%';
+    $('game').style.setProperty('--color-count',puzzle.palette.length);$('game').style.setProperty('--dock-columns',puzzle.palette.length>10?6:5);$('hint').setAttribute('aria-pressed','false');$('board').style.setProperty('--size',puzzle.size);$('board').style.width='100%';
     $('board').setAttribute('aria-rowcount',puzzle.size);$('board').setAttribute('aria-colcount',puzzle.size);$('board').replaceChildren();cells=[];
     for(let y=0;y<puzzle.size;y++){
       const row=document.createElement('div');row.className='board-row';row.setAttribute('role','row');row.setAttribute('aria-rowindex',y+1);

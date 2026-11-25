@@ -274,7 +274,7 @@ body > footer { display: none; }
   .brush-selection { width: auto; justify-self: center; min-width: 165px; height: 36px; padding: 2px 8px; }
   .brush-selection .eyebrow { display: none; }
   .brush-selection strong { margin: 0; }
-  .palette { grid-template-columns: repeat(5, minmax(0, 1fr)); grid-template-rows: none; grid-auto-rows: 55px; gap: 3px 6px; }
+  .palette { grid-template-columns: repeat(var(--dock-columns, 5), minmax(0, 1fr)); grid-template-rows: none; grid-auto-rows: 55px; gap: 3px 6px; }
   .color-button { max-width: 65px; height: 55px; border-radius: 10px; }
   .color-button small { bottom: 0; }
   .color-button[aria-pressed=true]::after { width: 14px; height: 14px; font-size: 9px; }

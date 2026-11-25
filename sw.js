@@ -1,6 +1,6 @@
 'use strict';
 const CACHE_PREFIX='leynilitir-colorbynumbers-';
-const CACHE_NAME=CACHE_PREFIX+'v3';
+const CACHE_NAME=CACHE_PREFIX+'v4';
 const ASSETS=['./','./index.html','./styles.css','./puzzles.js','./app.js','./app-shell.js','./manifest.webmanifest','./icon.svg','./icons/icon-192.png','./icons/icon-512.png','./icons/icon-maskable-512.png','./icons/apple-touch-icon.png'];
 const URLS=new Set(ASSETS.map(path=>new URL(path,self.registration.scope).href));
 self.addEventListener('install',event=>{
