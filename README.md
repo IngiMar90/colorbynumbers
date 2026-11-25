@@ -4,7 +4,7 @@
 
 ## Spila
 
-Veldu stig og leynimynd. Veldu númeraðan lit og smelltu á reiti með sama númeri. Einnig má halda músarhnappnum niðri og draga. Rangt litaval breytir ekki myndinni og engin tímamörk eða stigatap eru í leiknum.
+Veldu stig og leynimynd. Veldu númeraða málningardós neðst og smelltu á reiti með sama númeri. Pensilbendillinn byrjar hvítur og oddurinn fær litinn sem þú velur. Hægra megin við myndina er skýring með númeri, litasýni og heiti hvers litar. Sýnishorn af penslinum við málningardósirnar sýnir líka valinn lit á snertiskjá. Einnig má halda músarhnappnum niðri og draga. Rangt litaval breytir ekki myndinni og engin tímamörk eða stigatap eru í leiknum.
 
 | Stig | Stærð | Litir | Myndir |
 | --- | --- | --- | --- |

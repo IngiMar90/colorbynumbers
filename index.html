@@ -28,17 +28,22 @@
   <div id="puzzles" class="puzzle-grid"></div>
   <p class="save-note">✓ Framvindan þín vistast í þessum vafra. Þú getur haldið áfram seinna.</p>
 </section>
-<section id="game" hidden>
+<section id="game" class="paint-mode" hidden>
   <div class="game-heading"><button id="back" class="text-button">← Allar myndir</button><div class="game-meta"><span id="game-level" class="pill"></span><span id="game-size" class="subtle"></span></div></div>
   <div class="play-layout">
-    <aside class="play-sidebar"><span class="eyebrow">LEYNDARDÓMUR Í HVERJUM REIT</span><h1 id="puzzle-title">Leynimynd 01</h1><p id="game-instruction">Veldu lit og litaðu reiti með sama númeri.</p>
-      <div class="progress-card"><div><span>Myndin þín</span><strong id="progress-label">0%</strong></div><progress id="progress" max="100" value="0" aria-label="Framvinda myndar"></progress><span id="cell-count" class="subtle"></span></div>
-      <div class="palette-heading"><h2>Veldu lit</h2><span id="selected-label"></span></div><div id="palette" class="palette" aria-label="Litir"></div>
-      <div class="helper"><span aria-hidden="true">☝</span><p>Þú mátt líka halda músinni niðri og draga yfir reitina.</p></div>
-      <button id="hint" class="secondary-button" aria-pressed="false">✧ Sýna reiti með völdum lit</button>
-    </aside>
     <div class="board-column"><div class="board-toolbar"><span id="board-status">Hvaða mynd kemur í ljós?</span><div><button id="zoom-out" class="icon-button" aria-label="Minnka reiti">−</button><button id="zoom-in" class="icon-button" aria-label="Stækka reiti">+</button></div></div><div id="board-scroll" class="board-scroll"><div id="board" class="board" role="grid" aria-label="Litað eftir númerum"></div></div><div class="board-footer"><span>✦ Einn reitur í einu</span><button id="restart" class="text-button">↻ Byrja mynd aftur</button></div></div>
+
+    <aside class="play-sidebar">
+      <div class="puzzle-summary"><span class="eyebrow">LEYNDARDÓMUR Í HVERJUM REIT</span><h1 id="puzzle-title">Leynimynd 01</h1><p id="game-instruction">Veldu málningardós neðst og litaðu reiti með sama númeri.</p>
+        <div class="progress-card"><div><span>Myndin þín</span><strong id="progress-label">0%</strong></div><progress id="progress" max="100" value="0" aria-label="Framvinda myndar"></progress><span id="cell-count" class="subtle"></span></div>
+      </div>
+      <section class="color-guide" aria-labelledby="color-key-title"><h2 id="color-key-title">Númer og litir</h2><ol id="color-key" class="color-key"></ol><button id="hint" class="secondary-button" aria-pressed="false" disabled>✧ Sýna reiti með völdum lit</button></section>
+    </aside>
   </div>
+  <section class="paint-shelf" aria-labelledby="paint-title">
+    <div class="paint-shelf-heading"><div><span class="eyebrow">DÝFÐU PENSLINUM</span><h2 id="paint-title">Veldu málningardós</h2><p>Veldu lit. Litaðu sama númer. Þú mátt líka draga pensilinn.</p></div><div class="brush-selection"><span id="brush-preview" class="brush-preview" aria-hidden="true"></span><div><span class="eyebrow">PENSILLINN ÞINN</span><strong id="selected-label" role="status" aria-live="polite">Veldu lit fyrst</strong></div></div></div>
+    <div id="palette" class="palette" aria-label="Málningardósir"></div>
+  </section>
   <section id="celebration" class="celebration" hidden aria-labelledby="done-title"><span class="done-star" aria-hidden="true">✦</span><div><span class="eyebrow">LEYNDARDÓMURINN ER LEYSTUR!</span><h2 id="done-title"></h2><p>Vel gert! Þú litaðir alla myndina.</p></div><div class="done-actions"><button id="download" class="secondary-button">↓ Vista mynd</button><button id="next" class="primary-button">Næsta leynimynd →</button></div></section>
 </section>
 </main>

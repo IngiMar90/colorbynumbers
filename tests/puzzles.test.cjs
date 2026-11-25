@@ -12,6 +12,9 @@ test('four increasing levels and 24 valid, distinct pictures',()=>{
       const p=getPuzzle(l,n);
       assert.equal(p.values.length,level.size**2);
       assert.equal(p.palette.length,level.colors);
+      assert.equal(p.colorNames.length,level.colors);
+      assert(p.colorNames.every(name=>typeof name==='string'&&name.length>0));
+      for(let c=0;c<p.palette.length;c++)assert.equal(p.colorNames[c],level.colorNames[level.palette.indexOf(p.palette[c])], 'color labels must follow the numbered palette');
       assert.equal(new Set(p.values).size,level.colors);
       assert(p.values.every(c=>Number.isInteger(c)&&c>=0&&c<level.colors));
       assert(p.palette.every(c=>/^#[a-f0-9]{6}$/i.test(c)));

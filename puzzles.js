@@ -2,10 +2,10 @@
 (() => {
   'use strict';
   const LEVELS = [
-    { size: 8, colors: 4, name: 'Stórir reitir', note: 'Róleg byrjun', palette: ['#d7e9ed','#354e54','#ed8268','#e7bd54'] },
-    { size: 12, colors: 6, name: 'Aðeins fleiri', note: 'Nýjar uppgötvanir', palette: ['#dcecf0','#354650','#eb916e','#eac559','#fff0cf','#88ad86'] },
-    { size: 16, colors: 8, name: 'Litlar áskoranir', note: 'Meira að lita', palette: ['#dfeaf4','#3c455d','#e68d68','#ebc658','#f8efdb','#89af94','#a28cc2','#d7a9b6'] },
-    { size: 20, colors: 10, name: 'Stóra ævintýrið', note: 'Fyrir þolinmóða litara', palette: ['#dfebf2','#38465c','#df7968','#e9c259','#f8efd8','#80aa8b','#9c87bc','#d6a5c3','#719db5','#b98460'] }
+    { size: 8, colors: 4, name: 'Stórir reitir', note: 'Róleg byrjun', palette: ['#d7e9ed','#354e54','#ed8268','#e7bd54'], colorNames: ['Ljósblár','Dökkblár','Rauður','Gulur'] },
+    { size: 12, colors: 6, name: 'Aðeins fleiri', note: 'Nýjar uppgötvanir', palette: ['#dcecf0','#354650','#eb916e','#eac559','#fff0cf','#88ad86'], colorNames: ['Ljósblár','Dökkblár','Appelsínugulur','Gulur','Kremhvítur','Grænn'] },
+    { size: 16, colors: 8, name: 'Litlar áskoranir', note: 'Meira að lita', palette: ['#dfeaf4','#3c455d','#e68d68','#ebc658','#f8efdb','#89af94','#a28cc2','#d7a9b6'], colorNames: ['Ljósblár','Dökkblár','Appelsínugulur','Gulur','Kremhvítur','Grænn','Fjólublár','Bleikur'] },
+    { size: 20, colors: 10, name: 'Stóra ævintýrið', note: 'Fyrir þolinmóða litara', palette: ['#dfebf2','#38465c','#df7968','#e9c259','#f8efd8','#80aa8b','#9c87bc','#d6a5c3','#719db5','#b98460'], colorNames: ['Ljósblár','Dökkblár','Rauður','Gulur','Kremhvítur','Grænn','Fjólublár','Bleikur','Blár','Brúnn'] }
   ];
   const designs = [
     ['Hjarta', p => {p.poly([[3,4],[7,3],[10,6],[13,3],[17,4],[18,9],[10,17],[2,9]],2);p.rect(5,5,2,2,3);p.rect(1,17,18,2,1);}],
@@ -53,8 +53,9 @@
     // Rotate the number-to-color mapping per picture; numbers never name an object.
     const offset=(number*3+level)%info.colors;
     const palette=info.palette.map((_,i)=>info.palette[(i+offset)%info.colors]);
+    const colorNames=info.colorNames.map((_,i)=>info.colorNames[(i+offset)%info.colors]);
     const values=rasterize(index,info.size,info.colors).map(c=>(c-offset+info.colors)%info.colors);
-    return {id:`v1-${level}-${number}`,level,number,size:info.size,palette,values,name:designs[index][0]};
+    return {id:`v1-${level}-${number}`,level,number,size:info.size,palette,colorNames,values,name:designs[index][0]};
   }
   window.LeynilitirPuzzles={LEVELS,getPuzzle};
 })();
